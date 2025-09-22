@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: wisecow
-          image: wisecow-app:latest
+          image: gnanajothit18/wisecow-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 4499
