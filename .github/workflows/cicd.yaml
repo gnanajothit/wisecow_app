@@ -40,7 +40,7 @@ jobs:
   deploy-to-k8s:
     needs: build-and-push
     runs-on: ubuntu-latest
-    if: ${{ KUBECONFIG != '' }}
+    if: ${{ secrets.KUBECONFIG != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,12 +52,12 @@ jobs:
 
       - name: Configure kubeconfig
         run: |
-          if [ -z "${{ KUBECONFIG }}" ]; then
+          if [ -z "${{ secrets.KUBECONFIG }}" ]; then
             echo "KUBECONFIG secret is not set!"
             exit 1
           fi
           mkdir -p $HOME/.kube
-          echo "${{ KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
 
