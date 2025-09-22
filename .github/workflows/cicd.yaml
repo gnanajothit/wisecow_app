@@ -50,10 +50,16 @@ jobs:
         with:
           version: 'latest'
 
-      - name: Configure Kubeconfig
+      - name: Configure kubeconfig
         run: |
-          echo "${{ KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+          if [ -z "${{ secrets.KUBECONFIG }}" ]; then
+            echo "KUBECONFIG secret is not set!"
+            exit 1
+          fi
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
+
 
       - name: Replace image placeholder
         run: |
