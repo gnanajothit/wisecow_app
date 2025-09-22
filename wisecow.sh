@@ -1,9 +1,8 @@
 #!/bin/bash
 
 
-#!/bin/bash
 echo "Wisdom served on port 4499..."
-# Keep the container alive so we can exec
+
 while true; do sleep 10; done
 
 
