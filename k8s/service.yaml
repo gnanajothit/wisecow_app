@@ -5,7 +5,7 @@ metadata:
   labels:
     app: wisecow
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: wisecow
   ports:

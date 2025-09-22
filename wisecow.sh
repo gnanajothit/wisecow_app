@@ -1,4 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+
+#!/bin/bash
+echo "Wisdom served on port 4499..."
+# Keep the container alive so we can exec
+while true; do sleep 10; done
+
 
 SRVPORT=4499
 RSPFILE=response
@@ -25,13 +32,14 @@ EOF
 }
 
 prerequisites() {
-	command -v cowsay >/dev/null 2>&1 &&
-	command -v fortune >/dev/null 2>&1 || 
-		{ 
-			echo "Install prerequisites."
-			exit 1
-		}
+    for cmd in cowsay fortune; do
+        if ! command -v $cmd >/dev/null 2>&1; then
+            echo "$cmd missing, install prerequisites."
+            exit 1
+        fi
+    done
 }
+
 
 main() {
 	prerequisites
